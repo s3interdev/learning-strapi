@@ -1,3 +1,3 @@
-# Strapi application
+# Learning Strapi - Quickstart 00
 
-A quick description of your strapi application
+Introduction to Strapi and the basics of using Strapi.
