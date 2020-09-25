@@ -2,46 +2,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Quickstart 00 Blog | First Strapi Blog</title>
   </head>
   <body>
-    <h1>Quickstart 00 Blog</h1>
-    <div class="articles">display articles here...</div>
+    <div class="container">
 
-    <script>
-      const displayArticles = async () => {
-        const res = await fetch("/articles");
-        const articles = await res.json();
+        <!-- dynamic blog content goes here -->
 
-        const container = document.querySelector(".articles");
+      </div>
+    </div>
 
-        container.innerHTML = "";
-
-        articles.forEach((article) => {
-          // image
-          const image = document.createElement("img");
-
-          image.setAttribute("src", article.thumbnail.url);
-
-          container.appendChild(image);
-
-          // title
-          const title = document.createElement("h3");
-
-          title.innerText = article.title;
-
-          container.appendChild(title);
-
-          // content
-          const content = document.createElement("div");
-
-          content.innerText = article.content;
-
-          container.appendChild(content);
-        });
-      };
-
-      displayArticles();
-    </script>
+    <script src="app.js"></script>
   </body>
 </html>
