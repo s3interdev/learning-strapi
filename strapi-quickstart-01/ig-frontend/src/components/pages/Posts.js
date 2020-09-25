@@ -119,11 +119,15 @@ const Posts = () => {
 
 	console.log('url: ', url, 'desc: ', description, 'likes :', likes);
 	return (
-		<div className='post'>
-			<img src={url} alt='' />
-			<h4>{description}</h4>
-			<div>
-				<span>Likes: {likes}</span>
+		<div className='card'>
+			<div className='card-header'>
+				<img src={url} alt='' />
+			</div>
+			<div className='card-body'>
+				<h4>{description}</h4>
+				<p>
+					<span>Likes: {likes}</span>
+				</p>
 			</div>
 		</div>
 	);
