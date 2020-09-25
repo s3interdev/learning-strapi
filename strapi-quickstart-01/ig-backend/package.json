@@ -1,15 +1,14 @@
 {
-  "name": "strapi-quickstart-00",
+  "name": "ig-backend",
   "private": true,
   "version": "0.1.0",
-  "description": "Strapi Quickstart Blog",
+  "description": "Instagram Clone Backend Application.",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
     "strapi": "3.1.6",
     "strapi-admin": "3.1.6",
@@ -25,7 +24,7 @@
     "name": "Superior Software Solutions"
   },
   "strapi": {
-    "uuid": "caa0342a-fc4f-4209-a860-60096332cddc"
+    "uuid": "54e14629-7474-4620-b744-1ef5b07fa5ff"
   },
   "engines": {
     "node": ">=10.0.0",
