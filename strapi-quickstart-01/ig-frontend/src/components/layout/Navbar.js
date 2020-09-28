@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
 	return (
 		<div>
-			<nav className='blue' role='navigation'>
+			<nav className='teal' role='navigation'>
 				<div className='nav-wrapper container'>
 					<Link to='/' className='brand-logo'>
 						BlogCards
