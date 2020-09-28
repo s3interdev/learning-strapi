@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
+
 import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
+import Create from './components/pages/Create';
+import About from './components/pages/About';
 
 import './App.css';
 
@@ -19,7 +22,9 @@ const App = () => {
 		<Router>
 			<Navbar />
 			<Switch>
-				<Route path='/' exact component={Home} />
+				<Route exact path='/' component={Home} />
+				<Route exact path='/create' component={Create} />
+				<Route exact path='/about' component={About} />
 			</Switch>
 		</Router>
 	);

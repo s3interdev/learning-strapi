@@ -20,6 +20,7 @@ const Home = () => {
 
 	return (
 		<div className='container'>
+			<h5 className='center'>BlogCards</h5>
 			<div className='row'>
 				{posts.map((post, index) => (
 					<Posts key={index} likes={post.likes} desc={post.description} url={post.image.url} />

@@ -1,25 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 	return (
 		<div>
 			<nav className='blue' role='navigation'>
 				<div className='nav-wrapper container'>
-					<a href='' className='brand-logo'>
+					<Link to='/' className='brand-logo'>
 						BlogCards
-					</a>
-					<a href='' data-target='mobile-sidenav' className='sidenav-trigger'>
+					</Link>
+					<a href='#!' data-target='mobile-sidenav' className='sidenav-trigger'>
 						<i className='material-icons'>menu</i>
 					</a>
 					<ul id='nav-mobile' className='right hide-on-med-and-down'>
 						<li>
-							<a href=''>Home</a>
+							<Link to='/'>Home</Link>
 						</li>
 						<li>
-							<a href=''>Create Post</a>
+							<Link to='/create'>Create Post</Link>
 						</li>
 						<li>
-							<a href=''>About</a>
+							<Link to='/about'>About</Link>
 						</li>
 					</ul>
 				</div>
@@ -27,13 +28,13 @@ const Navbar = () => {
 
 			<ul className='sidenav' id='mobile-sidenav'>
 				<li>
-					<a href=''>Home</a>
+					<Link to='/'>Home</Link>
 				</li>
 				<li>
-					<a href=''>Create Post</a>
+					<Link to='/create'>Create Post</Link>
 				</li>
 				<li>
-					<a href=''>About</a>
+					<Link to='/about'>About</Link>
 				</li>
 			</ul>
 		</div>
