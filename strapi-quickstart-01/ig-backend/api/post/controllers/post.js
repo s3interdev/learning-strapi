@@ -12,8 +12,8 @@ module.exports = {
         ctx.throw(400, "Please add post description.");
       }
 
-      if (!files || !files.length) {
-        ctx.throw(400, "Please add a post photo.");
+      if (!files || !files.image) {
+        ctx.throw(400, "Please add a post image file.");
       }
 
       entity = await strapi.services.post.create(

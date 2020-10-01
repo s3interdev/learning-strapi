@@ -4,18 +4,19 @@ const Create = () => {
 	// declare application state
 	const [description, setDescription] = useState('');
 	const [file, setFile] = useState(null);
+	const [error, setError] = useState('');
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		// data validation
+		// entry validation
 		if (!description) {
-			// error message
+			setError('Please add post description.');
 			return;
 		}
 
 		if (!file) {
-			// error message
+			setError('Please add a post image.');
 			return;
 		}
 
@@ -24,14 +25,18 @@ const Create = () => {
 		formData.append('data', JSON.stringify({ description }));
 		formData.append('files.image', file);
 
-		const res = await fetch('/posts', {
-			method: 'POST',
-			body: formData,
-		});
+		try {
+			const res = await fetch('/posts', {
+				method: 'POST',
+				body: formData,
+			});
 
-		const data = await res.json();
+			const data = await res.json();
 
-		console.log('data :', data);
+			console.log('data :', data);
+		} catch (err) {
+			setError(err);
+		}
 	};
 
 	return (
@@ -40,6 +45,9 @@ const Create = () => {
 				<div className='column'>
 					<form className='box' onSubmit={handleSubmit}>
 						<h1 className='title is-4'>Create Post</h1>
+
+						{error && <p className='has-text-danger'>{error}</p>}
+
 						<div className='field'>
 							<label className='label'>Description</label>
 							<div className='control has-icons-left'>
@@ -47,7 +55,10 @@ const Create = () => {
 									type='text'
 									className='input'
 									value={description}
-									onChange={(event) => setDescription(event.target.value)}
+									onChange={(event) => {
+										setError('');
+										setDescription(event.target.value);
+									}}
 									placeholder='Say something about the post...'
 								/>
 								<span className='icon is-small is-left'>
@@ -58,7 +69,14 @@ const Create = () => {
 						<div className='field'>
 							<label className='label'>Choose File to Upload</label>
 							<div className='control'>
-								<input type='file' className='input' onChange={(event) => setFile(event.target.files[0])} />
+								<input
+									type='file'
+									className='input'
+									onChange={(event) => {
+										setError('');
+										setFile(event.target.files[0]);
+									}}
+								/>
 							</div>
 						</div>
 						<div className='field'>
