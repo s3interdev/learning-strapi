@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import 'materialize-css/dist/css/materialize.min.css';
-import M from 'materialize-css/dist/js/materialize.min.js';
+import 'bulma/css/bulma.min.css';
 
 import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
@@ -11,13 +10,6 @@ import About from './components/pages/About';
 import './App.css';
 
 const App = () => {
-	useEffect(() => {
-		// initialize materialize js
-		M.AutoInit();
-
-		// eslint-disable-next-line
-	}, []);
-
 	return (
 		<Router>
 			<Navbar />

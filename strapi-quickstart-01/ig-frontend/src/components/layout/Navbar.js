@@ -1,43 +1,42 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 
 const Navbar = () => {
-	return (
-		<div>
-			<nav className='teal' role='navigation'>
-				<div className='nav-wrapper container'>
-					<Link to='/' className='brand-logo'>
-						BlogCards
-					</Link>
-					<a href='#!' data-target='mobile-sidenav' className='sidenav-trigger'>
-						<i className='material-icons'>menu</i>
-					</a>
-					<ul id='nav-mobile' className='right hide-on-med-and-down'>
-						<li>
-							<Link to='/'>Home</Link>
-						</li>
-						<li>
-							<Link to='/create'>Create Post</Link>
-						</li>
-						<li>
-							<Link to='/about'>About</Link>
-						</li>
-					</ul>
-				</div>
-			</nav>
+	const [isActive, setisActive] = useState(false);
 
-			<ul className='sidenav' id='mobile-sidenav'>
-				<li>
-					<Link to='/'>Home</Link>
-				</li>
-				<li>
-					<Link to='/create'>Create Post</Link>
-				</li>
-				<li>
-					<Link to='/about'>About</Link>
-				</li>
-			</ul>
-		</div>
+	return (
+		<nav className='navbar has-shadow is-primary has-text-weight-medium' role='navigation' aria-label='main-navigation'>
+			<div className='navbar-brand'>
+				<a href='/' className='navbar-item'>
+					<span className='title is-4 has-text-white'>BlogCards</span>
+				</a>
+				<a
+					href='#!'
+					onClick={() => {
+						setisActive(!isActive);
+					}}
+					role='button'
+					className={`navbar-burger ${isActive ? 'is-active' : ''}`}
+					aria-label='menu'
+					aria-expanded='false'
+					data-target='responsiveNavbar'
+				>
+					<span aria-hidden='true'></span>
+					<span aria-hidden='true'></span>
+					<span aria-hidden='true'></span>
+				</a>
+			</div>
+
+			<div id='responsiveNavbar' className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
+				<div className='navbar-end'>
+					<a href='/create' className='navbar-item'>
+						Create Post
+					</a>
+					<a href='/about' className='navbar-item'>
+						About
+					</a>
+				</div>
+			</div>
+		</nav>
 	);
 };
 

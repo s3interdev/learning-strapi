@@ -20,8 +20,7 @@ const Home = () => {
 
 	return (
 		<div className='container'>
-			<h5 className='center'>BlogCards</h5>
-			<div className='row'>
+			<div className='columns is-multiline mx-4 my-4'>
 				{posts.map((post, index) => (
 					<Posts key={index} likes={post.likes} desc={post.description} url={post.image.url} />
 				))}

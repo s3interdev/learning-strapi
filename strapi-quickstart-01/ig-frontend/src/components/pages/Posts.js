@@ -2,16 +2,16 @@ import React from 'react';
 
 const Posts = ({ url, desc, likes }) => {
 	return (
-		<div className='col s12 m4'>
-			<div className='card medium'>
+		<div className='column is-4'>
+			<div className='card'>
 				<div className='card-image'>
-					<img className='responsive-img' src={url} alt='' />
+					<figure className='image is-4by3'>
+						<img className='responsive-img' src={url} alt='' />
+					</figure>
 				</div>
-				<div className='card-content'>
-					<span className='card-title'>{desc}</span>
-					<p>
-						<span>Likes: {likes}</span>
-					</p>
+				<div className='content'>
+					<p className='title is-4'>{desc}</p>
+					<p>Likes: {likes}</p>
 				</div>
 			</div>
 		</div>
