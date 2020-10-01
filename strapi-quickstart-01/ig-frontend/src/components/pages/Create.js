@@ -8,6 +8,17 @@ const Create = () => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
+		// data validation
+		if (!description) {
+			// error message
+			return;
+		}
+
+		if (!file) {
+			// error message
+			return;
+		}
+
 		const formData = new FormData();
 
 		formData.append('data', JSON.stringify({ description }));
