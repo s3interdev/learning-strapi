@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Posts from '../pages/Posts';
 
 const Home = () => {
@@ -19,12 +20,12 @@ const Home = () => {
 	}, []);
 
 	return (
-		<div className='container'>
-			<div className='columns is-multiline mx-4 my-4'>
-				{posts.map((post, index) => (
-					<Posts key={index} likes={post.likes} desc={post.description} url={post.image.url} />
-				))}
-			</div>
+		<div>
+			{posts.map((post) => (
+				<Link to={`/${post.id}`} key={post.id}>
+					<Posts likes={post.likes} desc={post.description} url={post.image.url} />
+				</Link>
+			))}
 		</div>
 	);
 };

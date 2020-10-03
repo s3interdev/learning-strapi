@@ -40,51 +40,42 @@ const Create = () => {
 	};
 
 	return (
-		<div className='container'>
-			<div className='columns mx-4 my-4'>
-				<div className='column'>
-					<form className='box' onSubmit={handleSubmit}>
-						<h1 className='title is-4'>Create Post</h1>
-
-						{error && <p className='has-text-danger'>{error}</p>}
-
-						<div className='field'>
-							<label className='label'>Description</label>
-							<div className='control has-icons-left'>
-								<input
-									type='text'
-									className='input'
-									value={description}
-									onChange={(event) => {
-										setError('');
-										setDescription(event.target.value);
-									}}
-									placeholder='Say something about the post...'
-								/>
-								<span className='icon is-small is-left'>
-									<i className='fas fa-edit'></i>
-								</span>
-							</div>
-						</div>
-						<div className='field'>
-							<label className='label'>Choose File to Upload</label>
-							<div className='control'>
-								<input
-									type='file'
-									className='input'
-									onChange={(event) => {
-										setError('');
-										setFile(event.target.files[0]);
-									}}
-								/>
-							</div>
-						</div>
-						<div className='field'>
-							<button className='button is-primary'>Submit</button>
-						</div>
-					</form>
+		<div className='form-header'>
+			<h2>Create Post</h2>
+			<br />
+			<form onSubmit={handleSubmit}>
+				{error && <p className='entry-error'>{error}</p>}
+				<div>
+					<label>Description:</label>
+					<br />
+					<input
+						type='text'
+						value={description}
+						onChange={(event) => {
+							setError('');
+							setDescription(event.target.value);
+						}}
+					/>
 				</div>
-			</div>
+				<br />
+				<div>
+					<label>Choose file to upload:</label>
+					<br />
+					<input
+						type='file'
+						className='input'
+						onChange={(event) => {
+							setError('');
+							setFile(event.target.files[0]);
+						}}
+					/>
+				</div>
+				<br />
+				<br />
+				<div>
+					<button>Submit</button>
+				</div>
+			</form>
 		</div>
 	);
 };
