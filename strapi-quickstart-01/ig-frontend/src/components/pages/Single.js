@@ -5,26 +5,44 @@ const Single = ({ match, history }) => {
 	const { id } = match.params;
 	const [post, setPost] = useState({});
 	const [loading, setLoading] = useState(true);
+	const [edit, setEdit] = useState(false);
+	const [description, setDescription] = useState('');
+
+	const fetchPost = async () => {
+		const res = await fetch(`/posts/${id}`);
+		const data = await res.json();
+
+		setPost(data);
+		setDescription(data.description);
+		setLoading(false);
+	};
 
 	const handleDelete = async () => {
 		const res = await fetch(`/posts/${id}`, { method: 'DELETE' });
 		const data = await res.json();
 
-		console.log(data, ' has been deleted.');
+		console.log(data, ' has been deleted...');
 
 		// redirect back to home page
 		history.push('/');
 	};
 
+	const handleEdit = async (event) => {
+		event.preventDefault();
+		const res = await fetch(`/posts/${id}`, {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ description }),
+		});
+
+		const data = await res.json();
+
+		console.log(data, ' has been edited...');
+
+		fetchPost();
+	};
+
 	useEffect(() => {
-		const fetchPost = async () => {
-			const res = await fetch(`/posts/${id}`);
-			const data = await res.json();
-
-			setPost(data);
-			setLoading(false);
-		};
-
 		fetchPost();
 
 		// eslint-disable-next-line
@@ -40,6 +58,23 @@ const Single = ({ match, history }) => {
 					{post.id && (
 						<Fragment>
 							<Post url={post.image && post.image.url} desc={post.description} likes={post.likes} />
+							<br />
+							<button onClick={() => setEdit(true)}>Edit Post</button>
+							{edit && (
+								<form onSubmit={handleEdit}>
+									<br />
+									<input
+										placeholder='New description...'
+										value={description}
+										onChange={(event) => {
+											setDescription(event.target.value);
+										}}
+									/>
+									<button>Confirm Edit</button>
+								</form>
+							)}
+							<br />
+							<br />
 							<button onClick={handleDelete}>Delete Post</button>
 						</Fragment>
 					)}
