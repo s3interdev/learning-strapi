@@ -23,7 +23,7 @@ const Home = () => {
 		<div>
 			{posts.map((post) => (
 				<Link to={`/${post.id}`} key={post.id}>
-					<Posts likes={post.likes} desc={post.description} url={post.image.url} />
+					<Posts url={post.image.url} desc={post.description} likes={post.likes} />
 				</Link>
 			))}
 		</div>
