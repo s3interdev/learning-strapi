@@ -33,7 +33,7 @@ const Create = () => {
 
 			const data = await res.json();
 
-			console.log('data :', data);
+			console.log(data, ' has been created.');
 		} catch (err) {
 			setError(err);
 		}
