@@ -3,19 +3,31 @@ import React, { useState } from 'react';
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [error, setError] = useState('');
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		const res = await fetch('/auth/local/', {
-			method: 'POST',
-			headers: { 'Content-type': 'application/json' },
-			body: JSON.stringify({ identifier: email, password: password }),
-		});
+		try {
+			const res = await fetch('/auth/local/', {
+				method: 'POST',
+				headers: { 'Content-type': 'application/json' },
+				body: JSON.stringify({ identifier: email, password: password }),
+			});
 
-		const data = await res.json();
+			const data = await res.json();
 
-		console.log(data, ' has logged in...');
+			console.log(data, ' has logged in...');
+
+			if (data.message) {
+				setError(data.message[0].messages[0].message);
+
+				// stop execution until error is corrected
+				return;
+			}
+		} catch (err) {
+			setError('An error has occured ' + err);
+		}
 	};
 
 	return (
@@ -23,15 +35,30 @@ const Login = () => {
 			<h2>Login</h2>
 			<br />
 			<form onSubmit={handleSubmit}>
+				{error && <p className='entry-error'>{error}</p>}
 				<div>
 					<label>Email Address</label>
 					<br />
-					<input type='email' value={email} onChange={(event) => setEmail(event.target.value)} />
+					<input
+						type='email'
+						value={email}
+						onChange={(event) => {
+							setError('');
+							setEmail(event.target.value);
+						}}
+					/>
 				</div>
 				<div>
 					<label>Password</label>
 					<br />
-					<input type='password' value={password} onChange={(event) => setPassword(event.target.value)} />
+					<input
+						type='password'
+						value={password}
+						onChange={(event) => {
+							setError('');
+							setPassword(event.target.value);
+						}}
+					/>
 				</div>
 				<br />
 				<br />
