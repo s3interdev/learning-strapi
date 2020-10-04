@@ -1,8 +1,12 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, useContext, Fragment } from 'react';
+import { UserContext } from '../../context/user/UserContext';
 import Post from '../pages/Posts';
 
 const Single = ({ match, history }) => {
 	const { id } = match.params;
+
+	const { user, setUser } = useContext(UserContext);
+
 	const [post, setPost] = useState({});
 	const [loading, setLoading] = useState(true);
 	const [edit, setEdit] = useState(false);
