@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Create = () => {
+const Create = ({ history }) => {
 	// declare application state
 	const [description, setDescription] = useState('');
 	const [file, setFile] = useState(null);
@@ -34,6 +34,9 @@ const Create = () => {
 			const data = await res.json();
 
 			console.log(data, ' has been created...');
+
+			// redirect back to home page
+			history.push('/');
 		} catch (err) {
 			setError(err);
 		}
