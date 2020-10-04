@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { UserContext } from '../../context/user/UserContext';
 
-const Login = () => {
+const Login = ({ history }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
+
+	const { user, setUser } = useContext(UserContext);
+
+	useEffect(() => {
+		// if the user is successfully logged in take them to the home page
+		if (user) {
+			history.push('/');
+		}
+	}, [user]);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -25,6 +35,8 @@ const Login = () => {
 				// stop execution until error is corrected
 				return;
 			}
+
+			setUser(data);
 		} catch (err) {
 			setError('An error has occured ' + err);
 		}
