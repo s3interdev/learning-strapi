@@ -16,8 +16,11 @@ module.exports = {
         ctx.throw(400, "Please add a post image file.");
       }
 
+      // user object always attached to the state
+      const { user } = ctx.state;
+
       entity = await strapi.services.post.create(
-        { ...data, likes: 0 },
+        { ...data, ...{ author: user, likes: 0 } },
         { files }
       );
     } else {

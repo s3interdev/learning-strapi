@@ -5,7 +5,7 @@ import Post from '../pages/Posts';
 const Single = ({ match, history }) => {
 	const { id } = match.params;
 
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 
 	const [post, setPost] = useState({});
 	const [loading, setLoading] = useState(true);
@@ -28,7 +28,7 @@ const Single = ({ match, history }) => {
 		});
 		const data = await res.json();
 
-		console.log(data, ' has been deleted...');
+		console.log(data.description, 'has been deleted...');
 
 		// redirect back to home page
 		history.push('/');
@@ -47,7 +47,7 @@ const Single = ({ match, history }) => {
 
 		const data = await res.json();
 
-		console.log(data, ' has been edited...');
+		console.log(data.description, 'has been edited...');
 
 		fetchPost();
 	};

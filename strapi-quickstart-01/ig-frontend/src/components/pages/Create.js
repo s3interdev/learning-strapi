@@ -42,7 +42,7 @@ const Create = ({ history }) => {
 
 			const data = await res.json();
 
-			console.log(data, ' has been created...');
+			console.log(data.description, 'has been created...');
 
 			// redirect back to home page
 			history.push('/');

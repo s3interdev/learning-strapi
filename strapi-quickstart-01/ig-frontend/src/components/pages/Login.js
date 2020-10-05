@@ -29,7 +29,7 @@ const Login = ({ history }) => {
 
 			const data = await res.json();
 
-			console.log(data, ' has logged in...');
+			console.log(data.user.username, 'has logged in...');
 
 			if (data.message) {
 				setError(data.message[0].messages[0].message);
