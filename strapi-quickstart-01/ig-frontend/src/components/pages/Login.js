@@ -13,6 +13,8 @@ const Login = ({ history }) => {
 		if (user) {
 			history.push('/');
 		}
+
+		// eslint-disable-next-line
 	}, [user]);
 
 	const handleSubmit = async (event) => {

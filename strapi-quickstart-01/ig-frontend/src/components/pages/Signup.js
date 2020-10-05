@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../../context/user/UserContext';
 
 const Signup = ({ history }) => {
+	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
@@ -13,6 +14,8 @@ const Signup = ({ history }) => {
 		if (user) {
 			history.push('/');
 		}
+
+		// eslint-disable-next-line
 	}, [user]);
 
 	const handleSubmit = async (event) => {
@@ -23,7 +26,7 @@ const Signup = ({ history }) => {
 				method: 'POST',
 				headers: { 'Content-type': 'application/json' },
 				body: JSON.stringify({
-					username: email,
+					username: username,
 					email: email,
 					password: password,
 				}),
@@ -52,6 +55,19 @@ const Signup = ({ history }) => {
 			<br />
 			<form onSubmit={handleSubmit}>
 				{error && <p className='entry-error'>{error}</p>}
+				<div>
+					<label>Username</label>
+					<br />
+					<input
+						type='text'
+						required
+						value={username}
+						onChange={(event) => {
+							setError('');
+							setUsername(event.target.value);
+						}}
+					/>
+				</div>
 				<div>
 					<label>Email Address</label>
 					<br />

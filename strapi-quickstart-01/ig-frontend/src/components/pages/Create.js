@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../../context/user/UserContext';
 
 const Create = ({ history }) => {
 	// declare application state
@@ -6,10 +7,17 @@ const Create = ({ history }) => {
 	const [file, setFile] = useState(null);
 	const [error, setError] = useState('');
 
+	// gain access to the authenticated user
+	const { user } = useContext(UserContext);
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
 		// entry validation
+		if (!user) {
+			setError('Please log in to post content.');
+		}
+
 		if (!description) {
 			setError('Please add post description.');
 			return;
@@ -28,6 +36,7 @@ const Create = ({ history }) => {
 		try {
 			const res = await fetch('/posts', {
 				method: 'POST',
+				headers: { Authorization: `Bearer ${user.jwt}` },
 				body: formData,
 			});
 
