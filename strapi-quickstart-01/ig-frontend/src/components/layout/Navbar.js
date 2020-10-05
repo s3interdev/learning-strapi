@@ -8,9 +8,6 @@ const Navbar = () => {
 	const authLinks = (
 		<Fragment>
 			<li>
-				<Link to='/'>Home </Link>
-			</li>
-			<li>
 				<Link to='/create'> Create </Link>
 			</li>
 		</Fragment>
@@ -18,6 +15,9 @@ const Navbar = () => {
 
 	const guestLinks = (
 		<Fragment>
+			<li>
+				<Link to='/'> Home </Link>
+			</li>
 			<li>
 				<Link to='/login'> Login </Link>
 			</li>

@@ -22,7 +22,10 @@ const Single = ({ match, history }) => {
 	};
 
 	const handleDelete = async () => {
-		const res = await fetch(`/posts/${id}`, { method: 'DELETE' });
+		const res = await fetch(`/posts/${id}`, {
+			method: 'DELETE',
+			headers: { Authorization: `Bearer ${user.jwt}` },
+		});
 		const data = await res.json();
 
 		console.log(data, ' has been deleted...');
@@ -35,7 +38,10 @@ const Single = ({ match, history }) => {
 		event.preventDefault();
 		const res = await fetch(`/posts/${id}`, {
 			method: 'PUT',
-			headers: { 'Content-Type': 'application/json' },
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${user.jwt}`,
+			},
 			body: JSON.stringify({ description }),
 		});
 
@@ -63,23 +69,27 @@ const Single = ({ match, history }) => {
 						<Fragment>
 							<Post url={post.image && post.image.url} desc={post.description} likes={post.likes} />
 							<br />
-							<button onClick={() => setEdit(true)}>Edit Post</button>
-							{edit && (
-								<form onSubmit={handleEdit}>
+							{user && (
+								<Fragment>
+									<button onClick={() => setEdit(true)}>Edit Post</button>
+									{edit && (
+										<form onSubmit={handleEdit}>
+											<br />
+											<input
+												placeholder='New description...'
+												value={description}
+												onChange={(event) => {
+													setDescription(event.target.value);
+												}}
+											/>
+											<button>Confirm Edit</button>
+										</form>
+									)}
 									<br />
-									<input
-										placeholder='New description...'
-										value={description}
-										onChange={(event) => {
-											setDescription(event.target.value);
-										}}
-									/>
-									<button>Confirm Edit</button>
-								</form>
+									<br />
+									<button onClick={handleDelete}>Delete Post</button>
+								</Fragment>
 							)}
-							<br />
-							<br />
-							<button onClick={handleDelete}>Delete Post</button>
 						</Fragment>
 					)}
 					{!post.id && <p>The post you are looking for does not exist.</p>}
