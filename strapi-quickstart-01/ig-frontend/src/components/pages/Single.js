@@ -52,6 +52,25 @@ const Single = ({ match, history }) => {
 		fetchPost();
 	};
 
+	const handleLike = async () => {
+		try {
+			const res = await fetch('/likes', {
+				method: 'Post',
+				headers: {
+					Authorization: `Bearer ${user.jwt}`,
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					post: parseInt(id),
+				}),
+			});
+
+			fetchPost();
+		} catch (err) {
+			console.log('Exception: ', err);
+		}
+	};
+
 	useEffect(() => {
 		fetchPost();
 
@@ -69,6 +88,13 @@ const Single = ({ match, history }) => {
 						<Fragment>
 							<Post url={post.image && post.image.url} desc={post.description} likes={post.likes} />
 							<br />
+							{user && (
+								<Fragment>
+									<button onClick={handleLike}>Like</button>
+									<br />
+									<br />
+								</Fragment>
+							)}
 							{user && (
 								<Fragment>
 									<button onClick={() => setEdit(true)}>Edit Post</button>
