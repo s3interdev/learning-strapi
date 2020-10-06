@@ -65,6 +65,29 @@ const Single = ({ match, history }) => {
 				}),
 			});
 
+			const data = await res.json();
+
+			console.log(data, 'has been liked...');
+
+			fetchPost();
+		} catch (err) {
+			console.log('Exception: ', err);
+		}
+	};
+
+	const handleUnlike = async () => {
+		try {
+			const res = await fetch(`/likes/${id}`, {
+				method: 'DELETE',
+				headers: {
+					Authorization: `Bearer ${user.jwt}`,
+				},
+			});
+
+			const data = await res.json();
+
+			console.log(data, 'has been unliked...');
+
 			fetchPost();
 		} catch (err) {
 			console.log('Exception: ', err);
@@ -91,6 +114,7 @@ const Single = ({ match, history }) => {
 							{user && (
 								<Fragment>
 									<button onClick={handleLike}>Like</button>
+									<button onClick={handleUnlike}>Unlike</button>
 									<br />
 									<br />
 								</Fragment>
