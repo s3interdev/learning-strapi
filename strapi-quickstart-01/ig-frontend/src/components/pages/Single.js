@@ -1,11 +1,18 @@
 import React, { useState, useEffect, useContext, Fragment } from 'react';
 import { UserContext } from '../../context/user/UserContext';
+import { LikesContext } from '../../context/likes/LikesContext';
 import Post from '../pages/Posts';
 
 const Single = ({ match, history }) => {
 	const { id } = match.params;
 
 	const { user } = useContext(UserContext);
+
+	const { likesGiven, reloader } = useContext(LikesContext);
+
+	const isPostLikedAlready = () => {
+		return likesGiven && likesGiven.find((like) => like.post && like.post.id === id);
+	};
 
 	const [post, setPost] = useState({});
 	const [loading, setLoading] = useState(true);
@@ -70,6 +77,7 @@ const Single = ({ match, history }) => {
 			console.log(data, 'has been liked...');
 
 			fetchPost();
+			reloader();
 		} catch (err) {
 			console.log('Exception: ', err);
 		}
@@ -89,6 +97,7 @@ const Single = ({ match, history }) => {
 			console.log(data, 'has been unliked...');
 
 			fetchPost();
+			reloader();
 		} catch (err) {
 			console.log('Exception: ', err);
 		}
@@ -113,8 +122,8 @@ const Single = ({ match, history }) => {
 							<br />
 							{user && (
 								<Fragment>
-									<button onClick={handleLike}>Like</button>
-									<button onClick={handleUnlike}>Unlike</button>
+									{isPostLikedAlready && <button onClick={handleUnlike}>Unlike</button>}
+									{!isPostLikedAlready && <button onClick={handleLike}>Like</button>}
 									<br />
 									<br />
 								</Fragment>

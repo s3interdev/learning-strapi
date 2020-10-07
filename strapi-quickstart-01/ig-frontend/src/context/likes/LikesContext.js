@@ -8,7 +8,7 @@ export default ({ children }) => {
 	const [likesGiven, setLikesGiven] = useState([]);
 	const [likesReceived, setLikesReceived] = useState([]);
 
-	useEffect(() => {
+	const reloader = () => {
 		if (user) {
 			const loadLikesGiven = async () => {
 				const res = await fetch(`/likes/given?user=${user.user.id}`, {
@@ -34,9 +34,13 @@ export default ({ children }) => {
 
 			loadLikesReceived();
 		}
+	};
+
+	useEffect(() => {
+		reloader();
 
 		// eslint-disable-next-line
 	}, [user]);
 
-	return <LikesContext.Provider value={{ likesGiven, likesReceived }}>{children}</LikesContext.Provider>;
+	return <LikesContext.Provider value={{ likesGiven, likesReceived, reloader }}>{children}</LikesContext.Provider>;
 };
